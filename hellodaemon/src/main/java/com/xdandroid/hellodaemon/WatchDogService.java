@@ -11,6 +11,12 @@ import android.content.Intent;
 import android.content.pm.PackageManager;
 import android.os.Build;
 import android.os.IBinder;
+import android.text.TextUtils;
+import android.util.Log;
+
+import com.robin.lazy.sms.SmsObserver;
+import com.robin.lazy.sms.SmsResponseCallback;
+import com.robin.lazy.sms.VerificationCodeSmsFilter;
 
 import java.util.concurrent.TimeUnit;
 
@@ -24,6 +30,32 @@ public class WatchDogService extends Service {
 
     protected static Disposable sDisposable;
     protected static PendingIntent sPendingIntent;
+
+    private SmsObserver smsObserver;
+
+    private String lastContent = "";
+
+    @Override
+    public void onCreate() {
+        super.onCreate();
+        smsObserver=new SmsObserver(this, new SmsResponseCallback() {
+            @Override
+            public void onCallbackSmsContent(String smsContent) {
+                if(TextUtils.isEmpty(smsContent)) {
+                    Log.d("LINZB", "短信为空异常");
+                    return;
+                }
+                if(!lastContent.equals(smsContent)) {
+                    Log.d("LINZB", smsContent);
+                    lastContent = smsContent;
+                } else {
+                    Log.d("LINZB", "回调短信重复");
+                }
+
+            }
+        }, new VerificationCodeSmsFilter("180"));
+        smsObserver.registerSMSObserver();
+    }
 
     /**
      * 守护服务，运行在:watch子进程中
@@ -111,6 +143,7 @@ public class WatchDogService extends Service {
     @Override
     public void onDestroy() {
         onEnd(null);
+        smsObserver.unregisterSMSObserver();
     }
 
     /**

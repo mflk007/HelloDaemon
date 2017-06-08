@@ -2,7 +2,11 @@
 <manifest
     xmlns:android="http://schemas.android.com/apk/res/android"
     package="com.xdandroid.sample">
-
+    <uses-permission android:name="android.permission.RECEIVE_SMS" />
+    <uses-permission android:name="android.permission.READ_SMS" />
+    <uses-permission android:name="android.permission.RECEIVE_BOOT_COMPLETED"/>
+    <uses-permission android:name="android.permission.ACCESS_NETWORK_STATE"/>
+    <uses-permission android:name="android.permission.REQUEST_IGNORE_BATTERY_OPTIMIZATIONS"/>
     <application
         android:name=".App"
         android:icon="@mipmap/ic_launcher"

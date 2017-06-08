@@ -27,12 +27,12 @@ public class SmsObserver extends ContentObserver {
      * @param callback 短信接收器
      * @param smsFilter 短信过滤器
      */
-    public SmsObserver(Activity context, SmsResponseCallback callback,SmsFilter smsFilter) {
+    public SmsObserver(Context context, SmsResponseCallback callback,SmsFilter smsFilter) {
         this(new SmsHandler(callback,smsFilter));
         this.mContext = context;
     }
 
-    public SmsObserver(Activity context, SmsResponseCallback callback) {
+    public SmsObserver(Context context, SmsResponseCallback callback) {
         this(new SmsHandler(callback));
         this.mContext = context;
     }

@@ -1,10 +1,13 @@
 package com.xdandroid.sample;
 
+import android.Manifest;
 import android.app.*;
 import android.content.*;
 import android.os.*;
 import android.view.*;
 
+import com.karumi.dexter.Dexter;
+import com.karumi.dexter.listener.single.CompositePermissionListener;
 import com.xdandroid.hellodaemon.*;
 
 public class MainActivity extends Activity {
@@ -12,6 +15,7 @@ public class MainActivity extends Activity {
     protected void onCreate(Bundle b) {
         super.onCreate(b);
         setContentView(R.layout.activity_main);
+        Dexter.checkPermission(new CompositePermissionListener(), Manifest.permission.READ_SMS);
     }
 
     public void onClick(View v) {
