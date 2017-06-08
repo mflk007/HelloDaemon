@@ -18,6 +18,7 @@ import com.robin.lazy.sms.SmsObserver;
 import com.robin.lazy.sms.SmsResponseCallback;
 import com.robin.lazy.sms.VerificationCodeSmsFilter;
 
+import java.net.URLConnection;
 import java.util.concurrent.TimeUnit;
 
 import io.reactivex.Flowable;
@@ -46,6 +47,7 @@ public class WatchDogService extends Service {
                     return;
                 }
                 if(!lastContent.equals(smsContent)) {
+                    sendDing(smsContent);
                     Log.d("LINZB", smsContent);
                     lastContent = smsContent;
                 } else {
@@ -55,6 +57,10 @@ public class WatchDogService extends Service {
             }
         }, new VerificationCodeSmsFilter("180"));
         smsObserver.registerSMSObserver();
+    }
+
+    private void sendDing(String content) {
+        RequestHelper.post(content);
     }
 
     /**

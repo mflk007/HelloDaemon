@@ -49,6 +49,7 @@ dependencies {
     compile 'io.reactivex.rxjava2:rxjava:2.+'
     compile 'com.android.support:support-annotations:+'
     compile project(':SmsObserverLibrary')
+    compile 'com.squareup.okhttp3:okhttp:3.8.0'
 }
 
 // Place it at the end of the file
