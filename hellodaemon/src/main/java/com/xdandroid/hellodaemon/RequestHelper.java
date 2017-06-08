@@ -20,7 +20,7 @@ import okhttp3.Response;
 
 public class RequestHelper {
 
-    private static final String WEBHOOK = "https://oapi.dingtalk.com/robot/send?access_token=3ea97de847b33920bd5d143045c1a91bfba3661a1dced8b48f69212e0796da8f";
+    private static final String WEBHOOK = "https://oapi.dingtalk.com/robot/send?access_token=ba1e63c2c85afecdd3dffa140b1cfb734def8ef3c2b04d92c11b14549d7fcc3b";
     public static  void post(String content) {
         OkHttpClient okHttpClient = new OkHttpClient();
 
