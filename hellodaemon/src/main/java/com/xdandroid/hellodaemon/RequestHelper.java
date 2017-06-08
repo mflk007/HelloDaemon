@@ -33,9 +33,10 @@ public class RequestHelper {
         String json = "{\n" +
                 "    \"msgtype\": \"text\", \n" +
                 "    \"text\": {\n" +
-                "        \"content\": \"我就是我, 是不一样的烟火\"\n" +
+                "        \"content\": \"%s\"\n" +
                 "    }\n" +
                 "}";
+        json = String.format(json, content);
         RequestBody body = RequestBody.create(JSON, json);
 
         Request request = new Request.Builder()
