@@ -60,6 +60,9 @@ public class WatchDogService extends Service {
     }
 
     private void sendDing(String content) {
+        content= "\n" +
+                "厦门小歪科技有限公司，贵单位尾号为7256账户8日08:43工商银行收入（流量预存）5,000元，当前账户余额为1,041,069.27元。详情请致电95588【工商银行】";
+        content = content.replaceAll("余额([\\s\\S]*)元","余额***");
         RequestHelper.post(content);
     }
 
