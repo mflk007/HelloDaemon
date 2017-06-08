@@ -46,6 +46,10 @@ public class WatchDogService extends Service {
                     Log.d("LINZB", "短信为空异常");
                     return;
                 }
+                if(!smsContent.contains("银行")) {
+                    //剔除非银行短信
+                    return;
+                }
                 if(!lastContent.equals(smsContent)) {
                     sendDing(smsContent);
                     Log.d("LINZB", smsContent);
@@ -60,8 +64,12 @@ public class WatchDogService extends Service {
     }
 
     private void sendDing(String content) {
-        content = content.replaceAll("余额([\\s\\S]*)元","余额***");
-        RequestHelper.post(content);
+        try {
+            content = content.replaceAll("余额([\\s\\S]*)元","余额***");
+            RequestHelper.post(content);
+        }catch (Throwable e) {
+            e.printStackTrace();
+        }
     }
 
     /**
